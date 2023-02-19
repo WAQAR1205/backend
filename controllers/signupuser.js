@@ -18,8 +18,8 @@ export const signupUser = async (req, res) => {
         status: false,
       });
     }
-    let user = await user.findOne({email}).select('+password');
-    if (user) {
+    let User = await user.findOne({email}).select('+password');
+    if (User) {
       res.status(400).json({
         message: 'user already exist',
         status: false,
@@ -39,11 +39,11 @@ export const signupUser = async (req, res) => {
       ),
     };
 
-    user = await user.create(obj_to_sent);
+    User = await user.create(obj_to_sent);
 
     sendToken(
       res,
-      userOne,
+      User,
       201,
       'signUp Successfully',
     );
